@@ -1,69 +1,133 @@
-# 🏧 ATM Simulator
+# ATM Simulator
 
-A Python-based ATM Simulation System that models concurrent banking operations using multithreading, synchronization locks, a Tkinter GUI, and a MySQL database.
+A Python and MySQL desktop ATM simulation developed as a university team project. It explores object-oriented design, relational database operations, Tkinter interfaces, and threaded ATM sessions.
 
-## 📌 Project Overview
+## Overview
 
-**ATM Simulator** is a desktop application that simulates multiple ATM sessions operating on shared banking records—including accounts, linked cards, banks, and transactions—while handling concurrent updates safely.
+The project models a small banking environment with banks, ATM terminals, customer accounts, cards, administrators, and transaction records. The Python classes interact with a MySQL/MariaDB database, while Tkinter provides a basic desktop navigation interface.
 
-The system uses Python threads and synchronization locks to maintain balance consistency, log transactions, and generate PDF transaction history reports with visual plots.
+> **Project status:** This is an academic prototype, not production banking software. The current `main.py` provides a basic GUI navigation shell; the domain classes contain the account, card, ATM, bank, administrator, and transaction operations.
 
-## ✨ Key Features
+## Features represented in the project
 
-- **User Authentication:** Validates card numbers and PINs before granting access to ATM services.
-- **Deposit & Withdrawal:** Supports deposits and withdrawals with balance validation.
-- **Balance Inquiry:** Displays and refreshes the current account balance.
-- **Multithreading:** Handles multiple ATM sessions and operations concurrently.
-- **Synchronization:** Uses locks (`threading.Lock`) to protect shared account balances from race conditions.
-- **Transaction Logging:** Records transaction type, amount, timestamp, account ID, and ATM ID in MySQL.
-- **PDF Report & Chart Generation:** Exports transaction history into a PDF report with a transaction amount plot.
-- **Graphical User Interface:** Desktop interface built with Tkinter and Pillow (`PIL`).
+- Card/PIN validation through the `Card` class.
+- Account balance operations for deposits and withdrawals.
+- ATM and account transaction-history queries.
+- MySQL persistence for accounts, cards, banks, ATMs, administrators, and transactions.
+- Thread-based ATM/account classes and synchronization locks.
+- A Tkinter desktop entry point with ATM and Admin navigation screens.
+- SQL schema and sample records for local setup.
 
-## 🛠️ Technologies Used
+## Tech Stack
 
-- **Python:** Core application logic and object-oriented structure.
-- **Tkinter & Pillow (`PIL`):** Desktop GUI development and image handling.
-- **MySQL (`mysql-connector`):** Relational database for accounts, cards, banks, ATMs, admins, and transactions.
-- **Threading (`threading.Thread`, `threading.Lock`):** Concurrent transaction processing and synchronization.
-- **ReportLab & Matplotlib:** PDF statement generation and transaction amount plotting.
-- **Traceback & Messagebox:** Error handling, debugging, and user notifications.
+| Area | Technology |
+| --- | --- |
+| Language | Python |
+| Desktop UI | Tkinter |
+| Database | MySQL / MariaDB |
+| Database driver | mysql-connector-python |
+| Concurrency concepts | threading, threading.Lock |
+| Database script | SQL |
 
-## ⚙️ Concurrency: Multithreading vs. Sequential Processing
+## Project Structure
 
-The project illustrates how concurrent execution differs from sequential processing:
+```text
+.
+├── main.py              # Tkinter navigation shell
+├── ATM.py               # ATM operations and transaction logging
+├── account.py           # Account model and balance operations
+├── account(1).py        # Original account module retained from the team project
+├── admin.py             # Administrator operations
+├── bank.py              # Bank and ATM/account management
+├── card.py              # Card validation and linked account
+├── db.py                # MySQL connection and query helpers
+├── login.py             # Administrator login
+├── register.py          # Administrator registration
+├── transaction.py       # Transaction model and history queries
+├── atmsimulator.sql     # Database schema and demo records
+└── requirements.txt     # Python package dependencies
+```
 
-- **Sequential Processing:** Transactions run one after another, which can increase waiting time.
-- **Multithreading:** Multiple ATM sessions can run concurrently, reducing idle wait times.
-- **Synchronization:** Locks coordinate access to shared account balance updates so concurrent operations stay consistent.
+## Setup
 
-## 📐 System Design
+### 1. Prerequisites
 
-The project documentation includes system design diagrams illustrating workflows and interactions:
+- Python 3.9 or later
+- MySQL Server or MariaDB
+- A database client such as MySQL Workbench or phpMyAdmin
 
-- **Use Case Diagram**
-- **Activity Diagram**
-- **Sequence Diagram**
+### 2. Clone the repository
 
-## 👩‍💻 My Contribution
+```bash
+git clone https://github.com/MernaAyman-l/ATM-Simulator-Python-MySQL.git
+cd ATM-Simulator-Python-MySQL
+```
 
-- Served as **Team Leader** for the project team.
-- Developed and worked on the **Graphical User Interface (GUI)** using **Tkinter**.
-- Participated in system design, including the **Sequence Diagram**.
+### 3. Install Python dependencies
 
-## 👥 Team Members
+```bash
+python -m venv .venv
+```
 
-1. Merna Ayman Louis Soares *(Team Leader)*
-2. Yara Ahmed Fathy Habib
-3. Adel Ali Ibrahim Ali
-4. Mahmoud Mohamed Ahmed Sayed
-5. Basma Mohamed Abdel Mouty Shehata
-6. Heba Adel Ali Abdel Khalik
+Activate the environment:
+
+**Windows PowerShell**
+```powershell
+.venv\\Scripts\\Activate.ps1
+```
+
+**macOS / Linux**
+```bash
+source .venv/bin/activate
+```
+
+Install the required package:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 4. Create the database
+
+1. Start MySQL or MariaDB.
+2. Create a database named `atmsimulator`.
+3. Import `atmsimulator.sql` into that database.
+
+The current database helper in `db.py` uses local defaults (`localhost`, user `root`, empty password). Update those settings in `db.py` to match your local MySQL configuration before connecting.
+
+### 5. Run the current GUI shell
+
+```bash
+python main.py
+```
+
+The current entry point opens the Tkinter navigation shell. The ATM/Admin screens are starter interfaces; the backend classes and database operations are separate project components.
+
+## My Contribution
+
+- Served as the **Team Leader**.
+- Worked on the **Tkinter graphical user interface**.
+- Contributed to system design, including the **Sequence Diagram**.
+
+## Team
+
+- Merna Ayman Louis Soares — Team Leader
+- Yara Ahmed Fathy Habib
+- Adel Ali Ibrahim Ali
+- Mahmoud Mohamed Ahmed Sayed
+- Basma Mohamed Abdel Mouty Shehata
+- Heba Adel Ali Abdel Khalik
 
 **Instructor:** Dr. Ahmed Hesham
 
-## 🎯 Project Objectives
+## Important Security Notes
 
-- Understand multithreading and concurrent programming in Python.
-- Apply synchronization mechanisms to protect shared resources.
-- Simulate core banking and ATM operations backed by a relational database.
-- Build desktop GUI applications and generate structured transaction reports.
+This repository is an educational simulation only. The supplied SQL dump contains demonstration records, including simple sample PINs and administrator passwords, and the current code compares/stores credentials in plain text. Do not reuse those credentials or deploy this project with real banking or personal data. A production implementation would require password/PIN hashing, secure configuration through environment variables, input validation, transaction-safe database operations, and stronger authorization controls.
+
+## Learning Goals
+
+- Practice object-oriented programming in Python.
+- Work with relational database schemas and SQL queries.
+- Understand threads and synchronization concepts.
+- Connect a desktop application to a MySQL/MariaDB database.
+- Model basic ATM and banking workflows.
