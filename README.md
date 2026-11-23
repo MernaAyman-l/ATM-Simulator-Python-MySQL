@@ -111,7 +111,7 @@ The current entry point opens the Tkinter navigation shell. The ATM/Admin screen
 
 ## Team
 
-- Merna Ayman Louis Soares — Team Leader
+- Merna Ayman Louis Saweris — Team Leader
 - Yara Ahmed Fathy Habib
 - Adel Ali Ibrahim Ali
 - Mahmoud Mohamed Ahmed Sayed
