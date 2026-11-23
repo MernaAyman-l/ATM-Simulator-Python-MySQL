@@ -34,9 +34,9 @@ The project models a small banking environment with banks, ATM terminals, custom
 ```text
 .
 ├── main.py              # Tkinter navigation shell
+├── legacy_demo.py       # Preserved command-line demonstration workflow
 ├── ATM.py               # ATM operations and transaction logging
 ├── account.py           # Account model and balance operations
-├── account(1).py        # Original account module retained from the team project
 ├── admin.py             # Administrator operations
 ├── bank.py              # Bank and ATM/account management
 ├── card.py              # Card validation and linked account
